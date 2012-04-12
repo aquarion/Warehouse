@@ -1,0 +1,5 @@
+[db]
+username = USERNAME
+password = PASSWORD
+host = localhost
+db = items 
