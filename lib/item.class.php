@@ -16,7 +16,7 @@ class Item {
         }
 
         function fetch_by_uniqid($id){
-                $q = $this->db->prepare("SELECT * FROM item WHERE uniqid=?");
+                $q = $this->db->prepare("SELECT * FROM item WHERE uniqid=? and removed = 0");
                 $q->bind_param("s", $id);
                 $q->execute();
                 $item = array_pop(stmt_as_array($q));
@@ -24,7 +24,7 @@ class Item {
         }
 
         function fetch_random(){
-                $q = $this->db->prepare("SELECT * FROM item ORDER BY RAND() limit 1");
+                $q = $this->db->prepare("SELECT * FROM item WHERE removed = 0 ORDER BY RAND() limit 1");
                 $q->execute();
                 $result = array_pop(stmt_as_array($q));
                 $this->populate($result);
@@ -72,6 +72,28 @@ class Item {
                         die("db error: ".$this->db->error);
                 }
 		$q->execute();
+	}
+
+	function unreviewed(){
+                $res = $this->db->query("SELECT * FROM item WHERE reviewed=0");
+		$items = array();
+		while ($row = $res->fetch_assoc()) {
+			$items[] = $row;
+		}
+		return $items;
+	}
+
+	function approve(){
+                $q = $this->db->prepare("UPDATE item SET reviewed = 1 WHERE uniqid=?");
+                $q->bind_param("s", $this->uniqid);
+                $q->execute();
+	}
+
+	function remove(){
+                $q = $this->db->prepare("UPDATE item SET reviewed = 1, removed = 1 WHERE uniqid=?");
+                $q->bind_param("s", $this->uniqid);
+                $q->execute();
+
 	}
 
 }
