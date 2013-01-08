@@ -49,6 +49,9 @@ class Item {
         }
 
         function populate($array){
+		if(!$array){
+			return;
+		}
                 foreach($array as $index => $value){
                         $this->$index = $value;
                 }

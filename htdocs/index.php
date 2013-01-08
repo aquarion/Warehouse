@@ -8,10 +8,21 @@ $db = new mysqli($config['db']['host'], $config['db']['username'], $config['db']
 
 $item = new Item($db);
 
+$error = false;
+
 if (isset($_POST['description'])){
-	$id = $item->create($_POST['author'], $_POST['description']);
-	header("location: /?entry=true");
-	die();
+	if($_POST['description']){
+		if($_POST['description'] != strip_tags($_POST['description'])){
+			$_POST['description'] = strip_tags($_POST['description']);
+			$error = "HTML is contraindicated, please review";
+		} else {
+			$id = $item->create($_POST['author'], $_POST['description']);
+			header("location: /?entry=true");
+			die();
+		}
+	} else {
+		$error = "Empty boxes are contraindicated";	
+	}
 }
 
 
@@ -28,93 +39,9 @@ if(isset($_GET['uid'])){
 <head>
 <title>The Basement - A Grue Liability Zone</title>
 <link href='http://fonts.googleapis.com/css?family=PT+Sans+Caption|Orbitron' rel='stylesheet' type='text/css'>
-
+<link href='style.css' type='text/css' rel='stylesheet'>
 <style type="text/css">
 
-body {
-	background: #222;
-	color: #EDEDED;
-	font-family: 'PT Sans Caption', sans-serif;
-	text-shadow: #000 0.1em 0.1em 0.3em;
-}
-
-header {
-	text-align: center;
-	margin-bottom: 2em;
-}
-
-header h1 {
-	color: #222;
-	font-size: 42pt;
-	text-shadow: #CCC 0 -0.25em 1.5em;
-	font-family: 'Orbitron', sans-serif;
-}
-
-.displayitem {
-}
-
-.hidden {
-	display: none;
-}
-
-nav {
-	color: #666;
-}
-
-nav a {
-	color: #777;
-	text-decoration: none;
-}
-
-nav a.selected {
-	color: #DDD;
-}
-
-nav a:hover {
-	color: #AAA;
-}
-
-label {
-	float: left;
-	display: block;
-	width: 10em;
-}
-
-.description {
-	padding-left: 10em;
-}
-
-.contentbox {
-	color: #333;
-	background: #EEE;
-	text-shadow: none;
-	padding: 2em;
-	box-shadow: #666 7px 7px 14px inset, #000 7px 7px 14px;
-	width: 900px;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-.voteup {
-	color: green;
-}
-
-.votedown {
-	color: red;
-}
-
-#item_added {
-	background: green;
-	color: white;
-	width: 100%;
-	height: 2em;
-	line-height: 2em;
-	position: absolute;
-	top: 0;
-	left: 0;
-	text-align: center;
-	box-shadow: #000 7px 0 14px;
-}
 
 </style>
 
@@ -126,11 +53,8 @@ $("document").ready(function(){
 		if ($(this).hasClass("selected")){
 			return;
 		}
-		console.log("Clicked "+this);
 		var showme = $("#"+$(this).attr("rel"));
-		$(".displayitem").slideUp("slow", function(){
-			console.log(showme);
-		});
+		$(".displayitem").slideUp("slow");
 		showme.slideDown("slow");
 		$('nav a').removeClass("selected");
 		$(this).addClass("selected");
@@ -160,6 +84,13 @@ $("document").ready(function(){
 		$('#item_added').fadeIn();
 		setTimeout("hide_added()", 3000);
 	}
+
+<?PHP if($error){ ?>
+
+	$(".displayitem").hide();
+	$("#add").slideDown();
+
+<?PHP } ?>
 
 });
 
@@ -215,18 +146,24 @@ if (isset($_GET['entry'])){
 	<li>Less is more. Leave it to the reader's imagination. No, more than that.</li>
 	<li>We already have Jimmy Hoffa, Elvis and Lord Lucan</li>
 	<li>"Seemingly Ordinary" is seemingly overused.</li>
+	<li>Boxes within in boxes within boxes within recursion within overuse within warehouse.</li>
 	<li>Originality beats Hitchhikers Guide references.</li>
 	<li>Keep it clean.</li>
 </ul>
 
+<?PHP
+	if($error){
+		printf('<p class="error">%s</p>', $error);
+	}
+?>
 
 <label>Description</label>
 <div class="description">
 	Inside a crate on level 1, you find ...<br/>
-	<textarea cols="40" rows="6" name="description"></textarea>
+	<textarea cols="40" rows="6" name="description"><?PHP echo isset($_POST['description']) ? $_POST['description'] : '' ?></textarea>
 </div>
 
-<label>Author</label><input type="text" name="author" />
+<label>Author</label><input type="text" name="author" value="<?PHP echo isset($_POST['author']) ? $_POST['author'] : '' ?>"/>
 <input type="submit" value="Insert" />
 </form>
 

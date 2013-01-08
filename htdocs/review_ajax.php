@@ -13,7 +13,7 @@ $item = new Item($db);
 
 if(isset($_POST['uniqid'])){
 	$item->fetch_by_uniqid($_POST['uniqid']);
-	if(!$item->description){
+	if(!$item->uniqid){
 		$item->description="No Item Found";
 	} else {
 		if ($_POST['action'] == "approve"){
