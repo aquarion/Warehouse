@@ -110,7 +110,7 @@ function hide_added(){
 		<a href="#" rel="item" class="selected">Item</a> | 
 		<a href="#" rel="about">About</a> | 
 		<a href="#" rel="add">Add Item</a> | 
-		<a href="/">Random</a>
+		<a href="/  id="random">Random</a>
 	</nav>
 </header>
 
@@ -124,14 +124,14 @@ if (isset($_GET['entry'])){
 <div class="contentbox">
 <div id="item" class="displayitem">
 <p>
-	Inside a crate on level 1, you find <br/>
-	<? echo nl2br($item->description); ?>
+	Inside a crate on level <?PHP  echo $item->level ?>, you find <br/>
+	<?PHP echo nl2br($item->description); ?>
 </p>
-<cite><? echo $item->author ?></cite>
+<cite id="author"><? echo $item->author ?></cite>
 
-[ <a href="/?uid=<?PHP echo $item->uniqid?>" title="Link to this item">Link</a>
-| <span id="voted"> <a href="#" rel="<?PHP echo $item->uniqid?>" class="vote voteup">I like this</a>
-| <a href="#" rel="<?PHP echo $item->uniqid?>" class="vote votedown">I don't like this</a></span> ]
+[ <a href="/?uid=<?PHP echo $item->uniqid?>" id="permalink" title="Link to this item">Link</a>
+| <span id="voted"> <a href="#" id="voteup" rel="<?PHP echo $item->uniqid?>" class="vote voteup">I like this</a>
+| <a href="#" id="votedown" rel="<?PHP echo $item->uniqid?>" class="vote votedown">I don't like this</a></span> ]
 
 </div>
 

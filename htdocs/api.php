@@ -17,4 +17,8 @@ if(isset($_GET['uid'])){
 	$item->fetch_random();
 }
 
+unset($item->creator_ip);
+unset($item->votes_up);
+unset($item->votes_down);
+
 print json_encode($item);
