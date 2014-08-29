@@ -18,6 +18,12 @@ header h1 {
 	font-family: 'Orbitron', sans-serif;
 }
 
+form {
+	text-shadow: 0px 0px 1px rgba(128,128,128,0.01); 
+	font-weight: lighter!important;
+	font-size: 12pt;
+	font-family: 'Share Tech Mono' monospace;
+}
 .displayitem {
 }
 

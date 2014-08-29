@@ -57,4 +57,4 @@ class Vote {
 $vote = new Vote($db);
 $vote->vote($_POST['uid'], $_POST['vote']);
 
-echo "Thank you for voting";
+echo "Noted. Thank you.";
