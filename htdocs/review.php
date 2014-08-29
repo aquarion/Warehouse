@@ -37,12 +37,40 @@ EOW;
 	padding: 1em;
 	margin: 1em;
 }
+
+.item_first {
+	border-color: red;
+}
 </style>
 <script type="text/javascript">
 
 removeIt = function(data){
-	console.log(data);
-	$('#'+data.uniqid).hide("slow");
+	$('#'+data.uniqid).hide("fast", function(){ $('#'+data.uniqid).remove(); runUpdates() });
+}
+
+runUpdates = function (){
+	console.log('Hi');
+	updateCount();
+	console.log($('.item')[0]);
+	$($('.item')[0]).addClass('item_first');
+}
+
+updateCount = function(){
+	$('#count').html($('.item:visible').length);
+}
+
+keyboardShortcuts = function(e){
+	if (e.which == 121){ // y
+		id = $('.item_first a.approve').attr('rel')
+		$('.item_first a.approve').click();
+		console.log("Yes to "+id);
+	} else if (e.which == 110){ // y
+		id = $('.item_first a.deny').attr('rel')
+		$('.item_first a.deny').click();
+		console.log("No to "+id);
+	} else {
+		console.log('Caught '+e.which);
+	}
 }
 
 $(document).ready(function(){
@@ -55,11 +83,18 @@ $(document).ready(function(){
 		$.post("review_ajax.php", { uniqid: $(this).attr("rel"), action : "remove"}, removeIt, "json");
 		return false;
 	});
+
+	$('body').keypress(keyboardShortcuts);
+
+	runUpdates();
 });
 
 </script>
 </head>
 <body>
+<div id="count">
+
+</div>
 <?PHP
 foreach($items as $item){
 	print_form($item);
