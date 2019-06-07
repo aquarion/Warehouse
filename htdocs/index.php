@@ -53,7 +53,7 @@ $agent = ucwords($agent);
 <html>
 <head>
 	<title>The Basement - A Grue Liability Zone</title>
-	<link href='http://fonts.googleapis.com/css?family=PT+Sans+Caption|Orbitron|Share+Tech+Mono' rel='stylesheet' type='text/css'>
+	<link href='//fonts.googleapis.com/css?family=PT+Sans+Caption|Orbitron|Share+Tech+Mono' rel='stylesheet' type='text/css'>
 	<link href='style.css' type='text/css' rel='stylesheet'>
 
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
@@ -130,7 +130,7 @@ if (isset($_GET['entry'])){
 <input type="submit" value="Insert" />
 
 <p><small>[1] This doesn't actually prove your humanity, just your ability to deal with integer numerical addition, but our research
-has suggested that this retards the progress of both artifical item generators and anyone with a maths degree, and that the
+has suggested that this arrests the progress of both artifical item generators and anyone with a maths degree, and that the
 latter usually get over it in time.</small></p>
 </form>
 

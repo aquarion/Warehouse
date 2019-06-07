@@ -8,6 +8,7 @@ class Item {
         public $date_added = "";
         public $votes_up = "";
         public $votes_down = "";
+        public $level = 1;
 
         private $db;
 
