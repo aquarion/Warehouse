@@ -121,7 +121,7 @@ if (isset($_GET['entry'])){
 
 <label>Description</label>
 <div class="description">
-	Inside a crate on level 1, you find ...<br/>
+	Inside a crate on level &#119909;, you find ...<br/>
 	<textarea cols="40" rows="6" name="description"><?PHP echo isset($_POST['description']) ? $_POST['description'] : '' ?></textarea>
 </div>
 
@@ -138,11 +138,13 @@ latter usually get over it in time.</small></p>
 
 <div id="about"  class="displayitem hidden">
 <h2>About</h2>
-<p>Once upon a time, the deepest dungeons of SJGames' Warehouse 23's basement were free to rummage in by the forces of the internet. Alas, technical problems took down the basement, and it never really recovered.</p>
+<p>Once upon a time, the deepest dungeons of SJGames' Warehouse 23's basement were free to rummage in by the forces of the internet. Alas, technical problems took down the basement, and while it eventually returned to being toured, it still accepts no new artifacts.</p>
 
-<p>This is an attempt to do the same thing. We don't have the ten years of submissions the old one did, nor do we have the vast vault of imagination that the old one was seeded with. We do have vote buttons, though. </p>
+<p>This is an attempt to do the same thing. We don't have the submissions the old one did, nor do we have the vast vault of imagination that the old one was seeded with. We do have vote buttons, though.</p>
 
-<p>This was created by <a href="mailto:nicholas+basement@istic.net">Nicholas Avenell</a> of <a href="http://istic.net">Istic.Networks</a>. It runs on stickyback plastic, string, PHP, MySQL &amp; jQuery. Its favourite letter is v, and its favourite position is the cookie monster. It's not endorsed by <a href="http://www.sjgames.com">SJ Games</a> or anyone involved with the original <a href="http://warehouse23.com">Warehouse 23</a> basement, and we don't accept liablity for any distress caused by items you find in it.</p>
+<p>This was created by <a href="mailto:support@istic.net">Nicholas Avenell</a> of <a href="http://istic.co">Istic</a>. It runs on stickyback plastic, string, PHP, MySQL &amp; jQuery. 
+Its favourite letter is <?PHP echo chr(rand(65,172)); ?>, and its favourite position is the cookie monster. 
+It's not endorsed by <a href="http://www.sjgames.com">SJ Games</a> or anyone involved with the original <a href="http://basement.warehouse23.com/">Warehouse 23 basement</a>, and we don't accept liablity for any distress caused by items you find in it.</p>
 </div>
 
 </div>
