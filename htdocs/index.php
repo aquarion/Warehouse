@@ -45,9 +45,7 @@ if(isset($_GET['uid'])){
 	$item->fetch_random();
 }
 
-$f_contents = file("../lib/agents.txt"); 
-$agent = $f_contents[rand(0, count($f_contents) - 1)];
-$agent = ucwords($agent);
+$agent = "An Unknown Agent";
 
 ?><!DOCTYPE html>
 <html>

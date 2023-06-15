@@ -20,14 +20,16 @@ class Item {
                 $q = $this->db->prepare("SELECT * FROM item WHERE uniqid=? and removed = 0");
                 $q->bind_param("s", $id);
                 $q->execute();
-                $item = array_pop(stmt_as_array($q));
+		$item = stmt_as_array($q);
+                $item = array_pop($item);
                 $this->populate($item);
         }
 
         function fetch_random(){
                 $q = $this->db->prepare("SELECT * FROM item WHERE removed = 0 ORDER BY RAND() limit 1");
                 $q->execute();
-                $result = array_pop(stmt_as_array($q));
+		$item = stmt_as_array($q);
+                $result = array_pop($item);
                 $this->populate($result);
         }
 
@@ -44,7 +46,8 @@ class Item {
                 } else {
                         $ip=$_SERVER["REMOTE_ADDR"];
                 }
-                $q->bind_param("ssss", uniqid(), $description, $author, $ip);
+		$uniq_id = uniqid();
+                $q->bind_param("ssss", $uniq_id, $description, $author, $ip);
                 $q->execute();
 
         }
